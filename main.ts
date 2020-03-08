@@ -821,11 +821,13 @@ namespace Rover
         {
             pins.digitalWritePin(DigitalPin.P16, 1); // set clock High
             while (pins.digitalReadPin(DigitalPin.P15) == 1) // wait for SDO to go Low
-    	        ;
+            {
+                basic.pause(1);	// stop thread blocking
+            }
             while (pins.digitalReadPin(DigitalPin.P15) == 0) // wait for SDO to go High again
-	    {
-	    	basic.pause(1);	// stop thread blocking
-	    }
+            {
+                basic.pause(1);	// stop thread blocking
+            }
             control.waitMicros(10);
             for (let index = 0; index <= 15; index++)
             {
